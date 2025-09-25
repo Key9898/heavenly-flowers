@@ -13,7 +13,7 @@ const socialIcons = [
         href: 'https://facebook.com',
         target: '_blank',
         rel: 'noopener noreferrer',
-        color: 'bg-blue-600/50'
+        color: 'bg-blue-600/90'
     },
     {
         name: 'Line',
@@ -25,7 +25,7 @@ const socialIcons = [
         href: 'https://line.me',
         target: '_blank',
         rel: 'noopener noreferrer',
-        color: 'bg-green-500/50'
+        color: 'bg-green-600/90'
     },
     {
         name: 'WhatsApp',
@@ -37,7 +37,7 @@ const socialIcons = [
         href: 'https://whatsapp.com',
         target: '_blank',
         rel: 'noopener noreferrer',
-        color: 'bg-green-600/50'
+        color: 'bg-green-600/90'
     },
 ]
 
@@ -66,7 +66,7 @@ const Chat = () => {
             <button
                 type="button"
                 onClick={() => setSocialMenuOpen(!socialMenuOpen)}
-                className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-gradient-to-br from-cyan-500/30 via-blue-500/25 to-indigo-500/30 backdrop-blur-lg border border-white/20 flex items-center justify-center text-white hover:scale-110 hover:shadow-xl hover:from-cyan-400/40 hover:via-blue-400/35 hover:to-indigo-400/40 transition-all duration-200 transform"
+                className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-gradient-to-br from-cyan-600/70 via-blue-600/75 to-indigo-600/70 backdrop-blur-lg border border-white/20 flex items-center justify-center text-white hover:scale-110 hover:shadow-xl hover:from-cyan-500/70 hover:via-blue-500/75 hover:to-indigo-500/70 transition-all duration-200 transform"
                 aria-label="Open social media menu"
             >
                 <ChatBubbleLeftRightIcon className={`w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-200 ${socialMenuOpen ? 'rotate-360' : ''}`} />

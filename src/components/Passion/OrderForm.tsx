@@ -157,7 +157,7 @@ export default function OrderForm() {
                       onChange={handleInputChange}
                       className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-slate-900 outline-1 -outline-offset-1 outline-slate-300 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-700 sm:text-sm/6"
                     >
-                      <option value="">Select flower type</option>
+                      <option value="" disabled>Select flower type</option>
                       <option value="roses">Roses</option>
                       <option value="tulips">Tulips</option>
                       <option value="lilies">Lilies</option>
@@ -183,7 +183,7 @@ export default function OrderForm() {
                       onChange={handleInputChange}
                       className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-slate-900 outline-1 -outline-offset-1 outline-slate-300 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-700 sm:text-sm/6"
                     >
-                      <option value="">Select flower color</option>
+                      <option value="" disabled>Select flower color</option>
                       <option value="red">Red</option>
                       <option value="pink">Pink</option>
                       <option value="white">White</option>
@@ -213,12 +213,11 @@ export default function OrderForm() {
                       onChange={handleInputChange}
                       className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-slate-900 outline-1 -outline-offset-1 outline-slate-300 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-700 sm:text-sm/6"
                     >
-                      <option value="">Select occasion</option>
+                      <option value="" disabled>Select occasion</option>
                       <option value="birthday">Birthday</option>
                       <option value="anniversary">Anniversary</option>
                       <option value="wedding">Wedding</option>
                       <option value="graduation">Graduation</option>
-                      <option value="corporate">Corporate</option>
                       <option value="corporate">Corporate</option>
                       <option value="mother-day">Mother's Day</option>
                       <option value="father-day">Father's Day</option>
@@ -241,7 +240,7 @@ export default function OrderForm() {
                       onChange={handleInputChange}
                       className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-slate-900 outline-1 -outline-offset-1 outline-slate-300 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-700 sm:text-sm/6"
                     >
-                      <option value="">Select budget range</option>
+                      <option value="" disabled>Select budget range</option>
                       <option value="under-50">Under $50</option>
                       <option value="50-100">$50 - $100</option>
                       <option value="100-200">$100 - $200</option>

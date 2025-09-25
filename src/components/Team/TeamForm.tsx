@@ -82,7 +82,7 @@ export default function TeamForm() {
                     required
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-slate-900 outline-1 -outline-offset-1 outline-slate-300 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-700 sm:text-sm/6"
                   >
-                    <option value="">Select a position</option>
+                    <option value="" disabled>Select a position</option>
                     <option value="floral-designer">Floral Designer</option>
                     <option value="sales-associate">Sales Associate</option>
                     <option value="delivery-driver">Delivery Driver</option>
@@ -119,7 +119,7 @@ export default function TeamForm() {
                     required
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-slate-900 outline-1 -outline-offset-1 outline-slate-300 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-700 sm:text-sm/6"
                   >
-                    <option value="">Select your availability</option>
+                    <option value="" disabled>Select your availability</option>
                     <option value="full-time">Full-time</option>
                     <option value="part-time">Part-time</option>
                     <option value="weekends">Weekends only</option>
