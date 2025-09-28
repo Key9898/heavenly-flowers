@@ -120,7 +120,7 @@ border-t border-cyan-300/40 shadow-2xl">
                 {/* Centered Copyright */}
                 <div className="mt-6 border-t border-slate-900/10 pt-4 sm:mt-8">
                     <p className="text-xs text-slate-300 text-center sm:text-sm">
-                        &copy; 2025 Heavenly Flowers, Fleurs du Ciel. All rights reserved.
+                        &copy; 2025 Heavenly Flowers, Fleurs du Ciel. All rights reserved. | Designed and Developed by Wunna Aung.
                     </p>
                 </div>
             </div>
