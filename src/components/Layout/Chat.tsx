@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
-import styles from './SocialMedia.module.css';
 
 const socialIcons = [
     {
@@ -13,7 +12,8 @@ const socialIcons = [
         href: 'https://facebook.com',
         target: '_blank',
         rel: 'noopener noreferrer',
-        color: 'bg-blue-600/90'
+        color: 'bg-blue-600/90',
+        delay: 'delay-0'
     },
     {
         name: 'Line',
@@ -25,7 +25,8 @@ const socialIcons = [
         href: 'https://line.me',
         target: '_blank',
         rel: 'noopener noreferrer',
-        color: 'bg-green-600/90'
+        color: 'bg-green-600/90',
+        delay: 'delay-[50ms]'
     },
     {
         name: 'WhatsApp',
@@ -37,7 +38,8 @@ const socialIcons = [
         href: 'https://whatsapp.com',
         target: '_blank',
         rel: 'noopener noreferrer',
-        color: 'bg-green-600/90'
+        color: 'bg-green-600/90',
+        delay: 'delay-[100ms]'
     },
 ]
 
@@ -48,13 +50,13 @@ const Chat = () => {
         <div className="fixed bottom-6 left-6 z-40">
             {/* Social Media Icons */}
             <div className={`flex flex-col space-y-3 mb-3 transition-all duration-300 ${socialMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
-                {socialIcons.map((social, index) => (
+                {socialIcons.map((social) => (
                     <a
                         key={social.name}
                         href={social.href}
                         target={social.target}
                         rel={social.rel}
-                        className={`${styles.socialMediaLink} ${social.color} ${styles[`socialDelay${index}`]}`}
+                        className={`w-12 h-12 sm:w-14 sm:h-14 rounded-lg backdrop-blur-xl border border-white/20 flex items-center justify-center text-white p-2 transition-all duration-200 hover:scale-110 hover:shadow-lg ${social.color} ${social.delay}`}
                         title={social.name}
                     >
                         {social.icon}

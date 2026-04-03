@@ -140,7 +140,7 @@ function ExpertiseCards({ onNavigate, currentPage }: ExpertiseCardsProps) {
                       setSelectedCard(index);
                       // Add a small delay to ensure the ring appears before navigation
                       setTimeout(() => {
-                        onNavigate && onNavigate(card.page);
+                        if (onNavigate) onNavigate(card.page);
                       }, 100);
                     }}
                     className="rounded-md bg-cyan-700 px-3 py-2.5 text-sm font-semibold text-white shadow-lg hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600 transition-all duration-200 transform hover:scale-105"

@@ -53,7 +53,7 @@ export default function OrderForm() {
         })
         setSubmitMessage('')
       }, 3000)
-    } catch (error) {
+    } catch {
       setSubmitMessage('Sorry, there was an error submitting your order. Please try again.')
     } finally {
       setIsSubmitting(false)

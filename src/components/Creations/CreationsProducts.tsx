@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import {
   Disclosure,
   DisclosureButton,
@@ -10,18 +10,9 @@ import {
   Transition,
 } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, FunnelIcon } from '@heroicons/react/20/solid'
-import roseImg from '../../assets/Product/red_rose_bouquet.jpg'
-import tulipImg from '../../assets/Product/pink_tulip_bouquet.jpg'
-import lilyImg from '../../assets/Product/white_lily_bouquet.jpg'
-import orchidImg from '../../assets/Product/purple_orchid.jpg'
-import sunflowerImg from '../../assets/Product/sunflower_bouquet.jpg'
-import forgetMeNotImg from '../../assets/Product/forget_me_nots_bouquet.jpg'
-import carnationImg from '../../assets/Product/orange_carnation_bouquet.jpg'
-import daisyImg from '../../assets/Product/white_daisy_bouquet.jpg'
-import peonyImg from '../../assets/Product/red_peony_bouquet.jpg'
-import pTulipImg from '../../assets/Product/purple_tulip_bouquet.jpg'
-import mixedBouquetImg from '../../assets/Product/mixed_bouquet.jpg'
+import { ChevronDownIcon, FunnelIcon, ArrowPathIcon } from '@heroicons/react/20/solid'
+import { useProducts } from '../../hooks/useProducts'
+import type { Product, FlowerType, ProductColor, OccasionType } from '../../types'
 import CreationsPagination from './CreationsPagination'
 import AllFlowersBanner from './AllFlowersBanner'
 import RosesBanner from './RosesBanner'
@@ -34,6 +25,7 @@ import CarnationsBanner from './CarnationsBanner'
 import DaisiesBanner from './DaisiesBanner'
 import PeoniesBanner from './PeoniesBanner'
 import MixedBouquetBanner from './MixedBouquetBanner'
+import placeholderImg from '../../assets/Product/mixed_bouquet.jpg'
 
 const filters = [
   {
@@ -86,149 +78,14 @@ const filters = [
       { value: 'anniversary', label: 'Anniversary' },
       { value: 'wedding', label: 'Wedding' },
       { value: 'graduation', label: 'Graduation' },
-      { value: 'valentines-day', label: 'Valentine\'s Day' },
-      { value: 'mothers-day', label: 'Mother\'s Day' },
-      { value: 'fathers-day', label: 'Father\'s Day' },
+      { value: 'valentines-day', label: "Valentine's Day" },
+      { value: 'mothers-day', label: "Mother's Day" },
+      { value: 'fathers-day', label: "Father's Day" },
       { value: 'corporate', label: 'Corporate' },
       { value: 'congratulations', label: 'Congratulations' },
       { value: 'apology', label: 'Apology' },
       { value: 'just-because', label: 'Just Because' },
     ],
-  },
-]
-
-const products = [
-  {
-    id: 1,
-    name: 'Red Rose Bouquet',
-    href: '#',
-    price: '฿450',
-    description: 'Beautiful red roses perfect for romantic occasions.',
-    color: 'red',
-    category: 'roses',
-    occasion: 'valentines-day',
-    imageSrc: roseImg,
-    imageAlt: 'Red rose bouquet',
-  },
-  {
-    id: 2,
-    name: 'Pink Tulip Bouquet',
-    href: '#',
-    price: '฿550',
-    description: 'Delicate pink tulips symbolizing happiness and affection.',
-    color: 'pink',
-    category: 'tulips',
-    occasion: 'mothers-day',
-    imageSrc: tulipImg,
-    imageAlt: 'Pink tulip bouquet',
-  },
-  {
-    id: 3,
-    name: 'White Lily Bouquet',
-    href: '#',
-    price: '฿599',
-    description: 'Elegant white lilies representing purity and majesty.',
-    color: 'white',
-    category: 'lilies',
-    occasion: 'wedding',
-    imageSrc: lilyImg,
-    imageAlt: 'White lily bouquet',
-  },
-  {
-    id: 4,
-    name: 'Purple Orchid Bouquet',
-    href: '#',
-    price: '฿750',
-    description: 'Exotic purple orchids for a touch of luxury and admiration.',
-    color: 'purple',
-    category: 'orchids',
-    occasion: 'congratulations',
-    imageSrc: orchidImg,
-    imageAlt: 'Purple orchid bouquet',
-  },
-  {
-    id: 5,
-    name: 'Sunflowers Bouquet',
-    href: '#',
-    price: '฿399',
-    description: 'Radiant sunflowers to bring joy and vibrancy.',
-    color: 'yellow',
-    category: 'sunflowers',
-    occasion: 'graduation',
-    imageSrc: sunflowerImg,
-    imageAlt: 'Sunflowers bouquet',
-  },
-  {
-    id: 6,
-    name: 'Blue Forget-me-not',
-    href: '#',
-    price: '฿1099',
-    description: 'Charming blue forget-me-nots that signify true love and remembrance.',
-    color: 'blue',
-    category: 'forget-me-not',
-    occasion: 'just-because',
-    imageSrc: forgetMeNotImg,
-    imageAlt: 'Blue forget-me-nots bouquet',
-  },
-  {
-    id: 7,
-    name: 'Orange Carnation Bouquet',
-    href: '#',
-    price: '฿420',
-    description: 'Vibrant orange carnations expressing enthusiasm and warmth.',
-    color: 'orange',
-    category: 'carnations',
-    occasion: 'fathers-day',
-    imageSrc: carnationImg,
-    imageAlt: 'Orange carnation bouquet',
-  },
-  {
-    id: 8,
-    name: 'White Daisy Bouquet',
-    href: '#',
-    price: '฿350',
-    description: 'Simple and sweet white daisies for innocence and new beginnings.',
-    color: 'white',
-    category: 'daisies',
-    occasion: 'apology',
-    imageSrc: daisyImg,
-    imageAlt: 'White daisy bouquet',
-  },
-  {
-    id: 9,
-    name: 'Red Peony Bouquet',
-    href: '#',
-    price: '฿850',
-    description: 'Luxurious red peonies that symbolize love, honor, and prosperity.',
-    color: 'red',
-    category: 'peonies',
-    occasion: 'anniversary',
-    imageSrc: peonyImg,
-    imageAlt: 'Red peony bouquet',
-  },
-  {
-    id: 10,
-    name: 'Purple Tulip Bouquet',
-    href: '#',
-    price: '฿480',
-    description: 'A luxurious arrangement of jewel-toned orchids and blossoms, perfect for making a bold statement.',
-    color: 'purple',
-    category: 'tulips',
-    occasion: 'corporate',
-    imageSrc: pTulipImg,
-    imageAlt: 'Purple tulip bouquet',
-  },
-  {
-    id: 11,
-    name: 'Mixed Bouquet',
-    href: '#',
-    price: '฿580',
-    description: 'A vibrant medley of seasonal flowers, artfully arranged for any occasion.',
-    color: 'mixed-colors',
-    category: 'mixed-bouquet',
-    occasion: 'birthday',
-    imageSrc: mixedBouquetImg,
-    imageAlt: 'Mixed flower bouquet',
   },
 ]
 
@@ -243,29 +100,39 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
+const formatPrice = (price: number): string => {
+  return `฿${price.toLocaleString()}`
+}
+
 interface CreationsProductsProps {
   onNavigate?: (page: string) => void
 }
 
 export default function CreationsProducts({ onNavigate }: CreationsProductsProps) {
+  const {
+    products,
+    loading,
+    error,
+    hasMore,
+    fetchProducts,
+  } = useProducts()
+
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedFlowerType, setSelectedFlowerType] = useState<string>('all-products')
-  const [selectedColor, setSelectedColor] = useState<string>('') // Changed to single value
-  const [selectedPriceRange, setSelectedPriceRange] = useState<string>('') // Changed to single value
-  const [selectedOccasion, setSelectedOccasion] = useState<string>('') // Changed to single value
+  const [selectedColor, setSelectedColor] = useState<string>('')
+  const [selectedPriceRange, setSelectedPriceRange] = useState<string>('')
+  const [selectedOccasion, setSelectedOccasion] = useState<string>('')
   const [currentSort, setCurrentSort] = useState<string>('price-low-high')
   const itemsPerPage = 6
   const productsRef = useRef<HTMLElement>(null)
 
-  // Helper function to parse price
-  const parsePrice = (priceString: string): number => {
-    return parseInt(priceString.replace('฿', '').replace(',', ''))
-  }
+  useEffect(() => {
+    fetchProducts(true)
+  }, [fetchProducts])
 
-  // Helper function to check if product matches price range
-  const matchesPriceRange = (product: any, priceRange: string): boolean => {
-    const price = parsePrice(product.price)
+  const matchesPriceRange = (product: Product, priceRange: string): boolean => {
+    const price = product.price
     switch (priceRange) {
       case 'under-400':
         return price < 400
@@ -282,42 +149,44 @@ export default function CreationsProducts({ onNavigate }: CreationsProductsProps
     }
   }
 
-  // Filter products based on all selected filters
-  const getFilteredProducts = () => {
+  const getFilteredProducts = (): Product[] => {
     let filtered = products
 
-    // Filter by flower type
     if (selectedFlowerType !== 'all-products') {
-      filtered = filtered.filter(product => product.category === selectedFlowerType)
+      filtered = filtered.filter(
+        (product) => product.flowerType === (selectedFlowerType as FlowerType)
+      )
     }
 
-    // Filter by color (single selection)
     if (selectedColor) {
-      filtered = filtered.filter(product => product.color === selectedColor)
+      filtered = filtered.filter(
+        (product) => product.color === (selectedColor as ProductColor)
+      )
     }
 
-    // Filter by price range (single selection)
     if (selectedPriceRange) {
-      filtered = filtered.filter(product => matchesPriceRange(product, selectedPriceRange))
+      filtered = filtered.filter((product) =>
+        matchesPriceRange(product, selectedPriceRange)
+      )
     }
 
-    // Filter by occasion (single selection)
     if (selectedOccasion) {
-      filtered = filtered.filter(product => product.occasion === selectedOccasion)
+      filtered = filtered.filter(
+        (product) => product.occasion === (selectedOccasion as OccasionType)
+      )
     }
 
     return filtered
   }
 
-  // Sort products
-  const getSortedProducts = (products: any[]) => {
-    const sorted = [...products]
+  const getSortedProducts = (productsToSort: Product[]): Product[] => {
+    const sorted = [...productsToSort]
 
     switch (currentSort) {
       case 'price-low-high':
-        return sorted.sort((a, b) => parsePrice(a.price) - parsePrice(b.price))
+        return sorted.sort((a, b) => a.price - b.price)
       case 'price-high-low':
-        return sorted.sort((a, b) => parsePrice(b.price) - parsePrice(a.price))
+        return sorted.sort((a, b) => b.price - a.price)
       case 'name-a-z':
         return sorted.sort((a, b) => a.name.localeCompare(b.name))
       case 'name-z-a':
@@ -330,7 +199,6 @@ export default function CreationsProducts({ onNavigate }: CreationsProductsProps
   const filteredProducts = getFilteredProducts()
   const sortedProducts = getSortedProducts(filteredProducts)
 
-  // Calculate pagination values
   const totalPages = Math.ceil(sortedProducts.length / itemsPerPage)
   const startIndex = (currentPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
@@ -341,7 +209,7 @@ export default function CreationsProducts({ onNavigate }: CreationsProductsProps
     if (productsRef.current) {
       productsRef.current.scrollIntoView({
         behavior: 'smooth',
-        block: 'start'
+        block: 'start',
       })
     }
   }
@@ -352,17 +220,17 @@ export default function CreationsProducts({ onNavigate }: CreationsProductsProps
   }
 
   const handleColorChange = (color: string) => {
-    setSelectedColor(selectedColor === color ? '' : color) // Toggle selection
+    setSelectedColor(selectedColor === color ? '' : color)
     setCurrentPage(1)
   }
 
   const handlePriceChange = (priceRange: string) => {
-    setSelectedPriceRange(selectedPriceRange === priceRange ? '' : priceRange) // Toggle selection
+    setSelectedPriceRange(selectedPriceRange === priceRange ? '' : priceRange)
     setCurrentPage(1)
   }
 
   const handleOccasionChange = (occasion: string) => {
-    setSelectedOccasion(selectedOccasion === occasion ? '' : occasion) // Toggle selection
+    setSelectedOccasion(selectedOccasion === occasion ? '' : occasion)
     setCurrentPage(1)
   }
 
@@ -379,7 +247,10 @@ export default function CreationsProducts({ onNavigate }: CreationsProductsProps
     setCurrentPage(1)
   }
 
-  // Render appropriate banner based on selected flower type
+  const handleRefresh = () => {
+    fetchProducts(true)
+  }
+
   const renderBanner = () => {
     switch (selectedFlowerType) {
       case 'roses':
@@ -407,15 +278,23 @@ export default function CreationsProducts({ onNavigate }: CreationsProductsProps
     }
   }
 
+  const getProductImage = (product: Product): string => {
+    if (product.images && product.images.length > 0) {
+      return product.images[0]
+    }
+    return placeholderImg
+  }
+
   return (
     <div>
-      {/* Dynamic Banner - Only one banner shows based on selection */}
       {renderBanner()}
 
-      {/* Mobile filter slide-down */}
       {mobileFiltersOpen && (
         <div className="lg:hidden">
-          <div className="fixed inset-0 z-40 bg-transparent" onClick={() => setMobileFiltersOpen(false)} />
+          <div
+            className="fixed inset-0 z-40 bg-transparent"
+            onClick={() => setMobileFiltersOpen(false)}
+          />
           <div className="fixed top-22 left-0 right-0 z-50 bg-white rounded-lg shadow-xl max-h-[80vh] overflow-y-auto mx-4">
             <div className="flex items-center justify-between px-4 py-4 border-b border-slate-200">
               <h2 className="text-lg font-medium text-slate-900">Filters</h2>
@@ -439,7 +318,6 @@ export default function CreationsProducts({ onNavigate }: CreationsProductsProps
               </div>
             </div>
 
-            {/* Mobile Filters */}
             <form className="px-4 pb-6">
               {filters.map((section) => (
                 <Disclosure
@@ -470,21 +348,25 @@ export default function CreationsProducts({ onNavigate }: CreationsProductsProps
                                 name={`${section.id}[]`}
                                 type="checkbox"
                                 checked={
-                                  section.id === 'flowers' ? selectedFlowerType === option.value :
-                                    section.id === 'color' ? selectedColor === option.value :
-                                      section.id === 'price' ? selectedPriceRange === option.value :
-                                        section.id === 'occasion' ? selectedOccasion === option.value :
-                                          false
+                                  section.id === 'flowers'
+                                    ? selectedFlowerType === option.value
+                                    : section.id === 'color'
+                                      ? selectedColor === option.value
+                                      : section.id === 'price'
+                                        ? selectedPriceRange === option.value
+                                        : section.id === 'occasion'
+                                          ? selectedOccasion === option.value
+                                          : false
                                 }
                                 onChange={() => {
                                   if (section.id === 'flowers') {
-                                    handleFlowerTypeChange(option.value);
+                                    handleFlowerTypeChange(option.value)
                                   } else if (section.id === 'color') {
-                                    handleColorChange(option.value);
+                                    handleColorChange(option.value)
                                   } else if (section.id === 'price') {
-                                    handlePriceChange(option.value);
+                                    handlePriceChange(option.value)
                                   } else if (section.id === 'occasion') {
-                                    handleOccasionChange(option.value);
+                                    handleOccasionChange(option.value)
                                   }
                                 }}
                                 className="col-start-1 row-start-1 appearance-none rounded-sm border border-slate-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-slate-300 disabled:bg-slate-100 disabled:checked:bg-slate-100 forced-colors:appearance-auto"
@@ -511,7 +393,10 @@ export default function CreationsProducts({ onNavigate }: CreationsProductsProps
                               </svg>
                             </div>
                           </div>
-                          <label htmlFor={`${section.id}-${optionIdx}-mobile`} className="text-sm text-slate-500">
+                          <label
+                            htmlFor={`${section.id}-${optionIdx}-mobile`}
+                            className="text-sm text-slate-500"
+                          >
                             {option.label}
                           </label>
                         </div>
@@ -538,7 +423,17 @@ export default function CreationsProducts({ onNavigate }: CreationsProductsProps
             </button>
           </div>
 
-          <div className="flex items-center justify-end w-full">
+          <div className="flex items-center justify-end w-full gap-4">
+            <button
+              type="button"
+              onClick={handleRefresh}
+              disabled={loading}
+              className="p-2 text-slate-400 hover:text-slate-500 disabled:opacity-50"
+              title="Refresh products"
+            >
+              <ArrowPathIcon className={`size-5 ${loading ? 'animate-spin' : ''}`} />
+            </button>
+
             <Menu as="div" className="relative inline-block text-left">
               <div>
                 <MenuButton className="group inline-flex justify-center text-sm font-medium text-slate-700 hover:text-slate-900">
@@ -565,7 +460,9 @@ export default function CreationsProducts({ onNavigate }: CreationsProductsProps
                         <button
                           onClick={() => handleSortChange(option.value)}
                           className={classNames(
-                            option.value === currentSort ? 'font-medium text-slate-900' : 'text-slate-500',
+                            option.value === currentSort
+                              ? 'font-medium text-slate-900'
+                              : 'text-slate-500',
                             'block w-full px-4 py-2 text-sm text-left data-focus:bg-slate-100 data-focus:outline-none'
                           )}
                         >
@@ -595,7 +492,6 @@ export default function CreationsProducts({ onNavigate }: CreationsProductsProps
           </h2>
 
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-            {/* Desktop Filters */}
             <form className="hidden lg:block">
               {filters.map((section) => (
                 <Disclosure
@@ -626,21 +522,25 @@ export default function CreationsProducts({ onNavigate }: CreationsProductsProps
                                 name={`${section.id}[]`}
                                 type="checkbox"
                                 checked={
-                                  section.id === 'flowers' ? selectedFlowerType === option.value :
-                                    section.id === 'color' ? selectedColor === option.value :
-                                      section.id === 'price' ? selectedPriceRange === option.value :
-                                        section.id === 'occasion' ? selectedOccasion === option.value :
-                                          false
+                                  section.id === 'flowers'
+                                    ? selectedFlowerType === option.value
+                                    : section.id === 'color'
+                                      ? selectedColor === option.value
+                                      : section.id === 'price'
+                                        ? selectedPriceRange === option.value
+                                        : section.id === 'occasion'
+                                          ? selectedOccasion === option.value
+                                          : false
                                 }
                                 onChange={() => {
                                   if (section.id === 'flowers') {
-                                    handleFlowerTypeChange(option.value);
+                                    handleFlowerTypeChange(option.value)
                                   } else if (section.id === 'color') {
-                                    handleColorChange(option.value);
+                                    handleColorChange(option.value)
                                   } else if (section.id === 'price') {
-                                    handlePriceChange(option.value);
+                                    handlePriceChange(option.value)
                                   } else if (section.id === 'occasion') {
-                                    handleOccasionChange(option.value);
+                                    handleOccasionChange(option.value)
                                   }
                                 }}
                                 className="col-start-1 row-start-1 appearance-none rounded-sm border border-slate-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-slate-300 disabled:bg-slate-100 disabled:checked:bg-slate-100 forced-colors:appearance-auto"
@@ -667,7 +567,10 @@ export default function CreationsProducts({ onNavigate }: CreationsProductsProps
                               </svg>
                             </div>
                           </div>
-                          <label htmlFor={`${section.id}-${optionIdx}`} className="text-sm text-slate-500">
+                          <label
+                            htmlFor={`${section.id}-${optionIdx}`}
+                            className="text-sm text-slate-500"
+                          >
                             {option.label}
                           </label>
                         </div>
@@ -678,40 +581,80 @@ export default function CreationsProducts({ onNavigate }: CreationsProductsProps
               ))}
             </form>
 
-            {/* Product grid */}
             <section ref={productsRef} className="lg:col-span-3">
-              {currentProducts.length === 0 ? (
+              {loading ? (
+                <div className="flex items-center justify-center py-12">
+                  <div className="flex flex-col items-center gap-4">
+                    <ArrowPathIcon className="size-8 text-cyan-600 animate-spin" />
+                    <p className="text-slate-500">Loading products...</p>
+                  </div>
+                </div>
+              ) : error ? (
                 <div className="text-center py-12">
-                  <h3 className="text-lg font-medium text-slate-900 mb-2">No Products Available</h3>
-                  <p className="text-slate-500">Try adjusting your filters to see more products.</p>
+                  <h3 className="text-lg font-medium text-red-600 mb-2">Error Loading Products</h3>
+                  <p className="text-slate-500 mb-4">{error}</p>
+                  <button
+                    onClick={handleRefresh}
+                    className="px-4 py-2 bg-cyan-600 text-white rounded-md hover:bg-cyan-500 transition-colors"
+                  >
+                    Try Again
+                  </button>
+                </div>
+              ) : currentProducts.length === 0 ? (
+                <div className="text-center py-12">
+                  <h3 className="text-lg font-medium text-slate-900 mb-2">
+                    No Products Available
+                  </h3>
+                  <p className="text-slate-500">
+                    Try adjusting your filters to see more products.
+                  </p>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-                  {currentProducts.map((product) => (
-                    <div key={product.id} className="group relative">
-                      <img
-                        alt={product.imageAlt}
-                        src={product.imageSrc}
-                        className="aspect-square w-full rounded-md bg-slate-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80"
-                      />
-                      <div className="mt-4 flex justify-between">
-                        <div>
-                          <h3 className="text-sm font-medium text-cyan-600">
-                            <a href={product.href}>
-                              <span aria-hidden="true" className="absolute inset-0" />
-                              {product.name}
-                            </a>
-                          </h3>
-                          <p className="mt-1 text-sm text-slate-700 line-clamp-2">{product.description}</p>
+                <>
+                  <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+                    {currentProducts.map((product) => (
+                      <div key={product.id} className="group relative">
+                        <img
+                          alt={product.name}
+                          src={getProductImage(product)}
+                          className="aspect-square w-full rounded-md bg-slate-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80"
+                        />
+                        <div className="mt-4 flex justify-between">
+                          <div>
+                            <h3 className="text-sm font-medium text-cyan-600">
+                              <span className="cursor-pointer">{product.name}</span>
+                            </h3>
+                            <p className="mt-1 text-sm text-slate-700 line-clamp-2">
+                              {product.description}
+                            </p>
+                          </div>
+                          <p className="text-sm font-medium text-slate-900">
+                            {formatPrice(product.price)}
+                          </p>
                         </div>
-                        <p className="text-sm font-medium text-slate-900">{product.price}</p>
+                        {!product.inStock && (
+                          <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
+                            Out of Stock
+                          </div>
+                        )}
                       </div>
+                    ))}
+                  </div>
+
+                  {hasMore && (
+                    <div className="mt-8 text-center">
+                      <button
+                        onClick={() => fetchProducts()}
+                        disabled={loading}
+                        className="px-6 py-2 bg-cyan-600 text-white rounded-md hover:bg-cyan-500 transition-colors disabled:opacity-50"
+                      >
+                        Load More Products
+                      </button>
                     </div>
-                  ))}
-                </div>
+                  )}
+                </>
               )}
 
-              {/* Pagination - only show if there are products */}
               {filteredProducts.length > 0 && (
                 <CreationsPagination
                   currentPage={currentPage}

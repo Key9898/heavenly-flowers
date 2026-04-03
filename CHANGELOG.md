@@ -8,7 +8,116 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-### Added
+### Phase 2 Core Features - 2026-04-04
+
+#### Added
+- **Custom Hooks** - Created data fetching hooks for all collections
+  - `src/hooks/useAuth.ts` - Authentication hook with Firebase integration
+  - `src/hooks/useProducts.ts` - Products CRUD operations
+  - `src/hooks/useCart.ts` - Shopping cart with localStorage persistence
+  - `src/hooks/useOrders.ts` - Order management with order number generation
+  - `src/hooks/useWorkshops.ts` - Workshop management with schedule support
+  - `src/hooks/useBookings.ts` - Workshop booking management
+  - `src/hooks/useArrangements.ts` - Arrangements CRUD with pagination
+  - `src/hooks/useInspirations.ts` - Inspirations CRUD with pagination
+  - `src/hooks/index.ts` - Central exports for all hooks
+
+- **Admin Forms** - Created CRUD forms for admin operations
+  - `src/components/Admin/ProductForm.tsx` - Product create/edit form
+  - `src/components/Admin/WorkshopForm.tsx` - Workshop create/edit form
+  - `src/components/Admin/ArrangementForm.tsx` - Arrangement create/edit form
+  - `src/components/Admin/InspirationForm.tsx` - Inspiration create/edit form
+
+- **Firestore Security Rules** - Comprehensive security rules for all collections
+  - Products: Public read, admin write
+  - Orders: User owns their orders, admin full access
+  - Workshops: Public read, admin write
+  - Bookings: User owns their bookings, admin full access
+  - Arrangements: Public read, admin write
+  - Inspirations: Public read, admin write
+  - Users: User owns their profile, admin full access
+
+- **Firestore Indexes** - Composite indexes for optimized queries
+  - Products: category + createdAt, featured + createdAt
+  - Orders: userId + createdAt, status + createdAt
+  - Workshops: status + startDate
+  - Bookings: userId + createdAt, workshopId + createdAt
+
+#### Changed
+- **Firebase Import Fix** - Fixed `import type { User }` in useAuth.ts
+  - Changed to `import { type User }` for proper TypeScript verbatimModuleSyntax compatibility
+
+- **UI/UX Improvements** - Coming Soon page enhancements
+  - Professional and clean design across all devices
+  - Responsive design for all screen sizes (xs to 2xl)
+  - Fixed broken UI elements
+
+- **Component Integration** - Connected CreationsProducts to useProducts hook
+  - Real-time data fetching from Firestore
+  - Loading states and error handling
+
+- **Code Logic Cleanup** - Removed semicolons from all hook files
+  - `src/hooks/useCart.ts`
+  - `src/hooks/useInspirations.ts`
+  - `src/hooks/useAuth.ts`
+  - `src/hooks/useArrangements.ts`
+  - `src/hooks/useOrders.ts`
+  - `src/hooks/useWorkshops.ts`
+  - `src/hooks/useBookings.ts`
+  - `src/hooks/index.ts`
+
+- **Project Plan Update** - Removed Phase 3 Dashboard Development
+  - Renamed Phase 4: Enhancements → Phase 3: Enhancements
+  - Renamed Phase 5: Deployment → Phase 4: Deployment
+
+#### Fixed
+- Firebase User import error in useAuth.ts (verbatimModuleSyntax compatibility)
+
+#### Technical Notes
+- All hooks follow project rules (no semicolons)
+- TypeScript strict mode compatible
+- Firebase v12.11.0 integration
+- React 19 + Vite 7.1.2 + Tailwind CSS v4
+
+### Branding & Assets - 2026-04-04
+
+#### Added
+- **Premium Favicon** - Created high-fidelity gold monogram "F" favicon in SVG format
+  - Professional serif typography with subtle floral accents
+  - Brand-consistent metallic gold color (`#B4912D`)
+  - Transparent background for premium integration
+- **Asset Organization** - Restructured public branding assets
+  - Created `public/favicon/` for browser identity icons
+  - Created `public/Logo/` for primary branding SVGs
+
+#### Changed
+- **Asset Paths** - Moved original `logo.svg` to the new `public/Logo/` directory
+- **Browser Integration** - Updated `index.html` to reference the new favicon location (`/favicon/favicon.svg`)
+
+### [General] - 2026-04-04
+
+#### Added
+
+- **Firebase Configuration** - Created `.env` file with Firebase project configuration
+  - All Firebase environment variables (API key, auth domain, project ID, storage bucket, etc.)
+  - VITE_ prefix for Vite compatibility
+
+- **Storybook Setup** - Configured Storybook for component documentation
+  - `.storybook/main.ts` - Core configuration with React-Vite framework
+  - `.storybook/preview.ts` - Preview configuration with Tailwind CSS import
+  - `src/components/Hero/HeroSection.stories.tsx` - Example story file
+  - Scripts: `npm run storybook` (dev), `npm run build-storybook` (build)
+  - Using alpha versions for Vite 7 compatibility (storybook@10.4.0-alpha.7)
+
+- **Phase 1 Completion** - All Phase 1 tasks completed
+  - Firebase project setup ✓
+  - Firebase Authentication ✓
+  - Firebase Firestore database ✓
+  - Firebase Storage ✓
+  - Project rules documentation ✓
+  - ESLint configuration ✓
+  - Prettier configuration ✓
+  - Storybook ✓
 
 - **Database Schema** - Added comprehensive Firestore collections schema to `PROJECT_PLAN.md`
   - 7 collections: products, orders, users, workshops, arrangements, inspirations, bookings

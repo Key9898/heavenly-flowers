@@ -1,10 +1,55 @@
+import { useState, type FormEvent } from 'react'
 import logo from '../../assets/Logo/logo.svg'
+import { useAuth } from '../../hooks'
 
 interface SignUpProps {
   onBackToSignIn?: () => void
 }
 
 export default function SignUp({ onBackToSignIn }: SignUpProps = {}) {
+  const { signUp, loading, error } = useAuth()
+  const [fullName, setFullName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [agreePrivacy, setAgreePrivacy] = useState(false)
+  const [agreeTerms, setAgreeTerms] = useState(false)
+  const [successMessage, setSuccessMessage] = useState('')
+  const [validationError, setValidationError] = useState('')
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    setSuccessMessage('')
+    setValidationError('')
+
+    if (!fullName.trim()) {
+      setValidationError('Please enter your full name')
+      return
+    }
+
+    if (password.length < 6) {
+      setValidationError('Password must be at least 6 characters')
+      return
+    }
+
+    if (password !== confirmPassword) {
+      setValidationError('Passwords do not match')
+      return
+    }
+
+    if (!agreePrivacy || !agreeTerms) {
+      setValidationError('Please agree to the Privacy Policy and Terms of Service')
+      return
+    }
+
+    try {
+      await signUp(email, password, fullName)
+      setSuccessMessage('Account created successfully! Please check your email to verify your account.')
+    } catch {
+      // Error is handled by useAuth hook
+    }
+  }
+
   return (
     <>
       <div className="flex min-h-full flex-col justify-center py-6 sm:px-6 lg:px-8">
@@ -21,7 +66,25 @@ export default function SignUp({ onBackToSignIn }: SignUpProps = {}) {
 
         <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-[400px]">
           <div className="bg-white px-4 py-6 shadow-sm sm:rounded-lg sm:px-6">
-            <form action="#" method="POST" className="space-y-4">
+            {error && (
+              <div className="mb-4 rounded-md bg-red-50 p-4">
+                <p className="text-sm text-red-700">{error}</p>
+              </div>
+            )}
+
+            {validationError && (
+              <div className="mb-4 rounded-md bg-red-50 p-4">
+                <p className="text-sm text-red-700">{validationError}</p>
+              </div>
+            )}
+
+            {successMessage && (
+              <div className="mb-4 rounded-md bg-green-50 p-4">
+                <p className="text-sm text-green-700">{successMessage}</p>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label htmlFor="full-name" className="block text-sm/6 font-medium text-slate-900">
                   Full Name
@@ -32,9 +95,12 @@ export default function SignUp({ onBackToSignIn }: SignUpProps = {}) {
                     name="full-name"
                     type="text"
                     required
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
                     placeholder="Enter your full name"
                     autoComplete="given-name"
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-slate-900 outline-1 -outline-offset-1 outline-slate-300 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-700 sm:text-sm/6"
+                    disabled={loading}
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-slate-900 outline-1 -outline-offset-1 outline-slate-300 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-700 sm:text-sm/6 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-500"
                   />
                 </div>
               </div>  
@@ -49,9 +115,12 @@ export default function SignUp({ onBackToSignIn }: SignUpProps = {}) {
                     name="email"
                     type="email"
                     required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="your.email@example.com"
                     autoComplete="email"
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-slate-900 outline-1 -outline-offset-1 outline-slate-300 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-700 sm:text-sm/6"
+                    disabled={loading}
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-slate-900 outline-1 -outline-offset-1 outline-slate-300 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-700 sm:text-sm/6 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-500"
                   />
                 </div>
               </div>
@@ -66,9 +135,32 @@ export default function SignUp({ onBackToSignIn }: SignUpProps = {}) {
                     name="password"
                     type="password"
                     required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="Make your strong password"
-                    autoComplete="current-password"
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-slate-900 outline-1 -outline-offset-1 outline-slate-300 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-700 sm:text-sm/6"
+                    autoComplete="new-password"
+                    disabled={loading}
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-slate-900 outline-1 -outline-offset-1 outline-slate-300 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-700 sm:text-sm/6 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="confirm-password" className="block text-sm/6 font-medium text-slate-900">
+                  Confirm Password
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="confirm-password"
+                    name="confirm-password"
+                    type="password"
+                    required
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Confirm your password"
+                    autoComplete="new-password"
+                    disabled={loading}
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-slate-900 outline-1 -outline-offset-1 outline-slate-300 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-700 sm:text-sm/6 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-500"
                   />
                 </div>
               </div>
@@ -81,6 +173,9 @@ export default function SignUp({ onBackToSignIn }: SignUpProps = {}) {
                         id="privacy-policy"
                         name="privacy-policy"
                         type="checkbox"
+                        checked={agreePrivacy}
+                        onChange={(e) => setAgreePrivacy(e.target.checked)}
+                        disabled={loading}
                         className="col-start-1 row-start-1 appearance-none rounded-sm border border-slate-300 bg-white checked:border-cyan-700 checked:bg-cyan-700 indeterminate:border-cyan-700 indeterminate:bg-cyan-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700 disabled:border-slate-300 disabled:bg-slate-100 disabled:checked:bg-slate-100 forced-colors:appearance-auto"
                       />
                       <svg
@@ -117,6 +212,9 @@ export default function SignUp({ onBackToSignIn }: SignUpProps = {}) {
                         id="terms-service"
                         name="terms-service"
                         type="checkbox"
+                        checked={agreeTerms}
+                        onChange={(e) => setAgreeTerms(e.target.checked)}
+                        disabled={loading}
                         className="col-start-1 row-start-1 appearance-none rounded-sm border border-slate-300 bg-white checked:border-cyan-700 checked:bg-cyan-700 indeterminate:border-cyan-700 indeterminate:bg-cyan-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700 disabled:border-slate-300 disabled:bg-slate-100 disabled:checked:bg-slate-100 forced-colors:appearance-auto"
                       />
                       <svg
@@ -150,9 +248,10 @@ export default function SignUp({ onBackToSignIn }: SignUpProps = {}) {
               <div>
                 <button
                   type="submit"
-                  className="rounded-md bg-cyan-700 px-3 py-2.5 text-sm font-semibold text-white shadow-lg hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600 transition-all duration-200 transform hover:scale-105 w-full"
+                  disabled={loading}
+                  className="rounded-md bg-cyan-700 px-3 py-2.5 text-sm font-semibold text-white shadow-lg hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600 transition-all duration-200 transform hover:scale-105 w-full disabled:cursor-not-allowed disabled:bg-cyan-700/50 disabled:transform-none"
                 >
-                  Continue
+                  {loading ? 'Creating account...' : 'Continue'}
                 </button>
               </div>
             </form>

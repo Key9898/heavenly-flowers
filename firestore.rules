@@ -1,0 +1,164 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isValidEmail(email) {
+      return email.matches('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$');
+    }
+
+    function isValidPhone(phone) {
+      return phone.matches('^[0-9]{10}$');
+    }
+
+    function isValidPostalCode(postalCode) {
+      return postalCode.matches('^[0-9]{5}$');
+    }
+
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create: if isOwner(userId);
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+
+      allow write: if isAuthenticated() &&
+        request.resource.data.email is string &&
+        request.resource.data.role in ['customer', 'admin'] &&
+        request.resource.data.createdAt is timestamp &&
+        request.resource.data.updatedAt is timestamp;
+    }
+
+    match /products/{productId} {
+      allow read: if true;
+      allow create: if isAdmin();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+
+      allow write: if isAdmin() &&
+        request.resource.data.name is string &&
+        request.resource.data.description is string &&
+        request.resource.data.price is number &&
+        request.resource.data.price >= 0 &&
+        request.resource.data.category in ['bouquet', 'arrangement', 'single', 'bundle', 'subscription'] &&
+        request.resource.data.images is list &&
+        request.resource.data.inStock is bool &&
+        request.resource.data.createdAt is timestamp &&
+        request.resource.data.updatedAt is timestamp;
+    }
+
+    match /orders/{orderId} {
+      allow read: if isOwner(resource.data.userId) || isAdmin();
+      allow create: if isAuthenticated();
+      allow update: if isOwner(resource.data.userId) || isAdmin();
+      allow delete: if isAdmin();
+
+      allow create: if isAuthenticated() &&
+        request.resource.data.userId == request.auth.uid &&
+        request.resource.data.orderNumber is string &&
+        request.resource.data.items is list &&
+        request.resource.data.subtotal is number &&
+        request.resource.data.subtotal >= 0 &&
+        request.resource.data.deliveryFee is number &&
+        request.resource.data.deliveryFee >= 0 &&
+        request.resource.data.total is number &&
+        request.resource.data.total >= 0 &&
+        request.resource.data.status in ['pending', 'confirmed', 'preparing', 'out_for_delivery', 'delivered', 'cancelled'] &&
+        request.resource.data.paymentStatus in ['unpaid', 'paid', 'refunded', 'failed'] &&
+        request.resource.data.shippingInfo is map &&
+        request.resource.data.createdAt is timestamp &&
+        request.resource.data.updatedAt is timestamp;
+    }
+
+    match /workshops/{workshopId} {
+      allow read: if true;
+      allow create: if isAdmin();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+
+      allow write: if isAdmin() &&
+        request.resource.data.title is string &&
+        request.resource.data.description is string &&
+        request.resource.data.image is string &&
+        request.resource.data.price is number &&
+        request.resource.data.price >= 0 &&
+        request.resource.data.duration is number &&
+        request.resource.data.duration > 0 &&
+        request.resource.data.maxParticipants is number &&
+        request.resource.data.maxParticipants > 0 &&
+        request.resource.data.schedule is list &&
+        request.resource.data.instructor is string &&
+        request.resource.data.location is string &&
+        request.resource.data.active is bool &&
+        request.resource.data.createdAt is timestamp &&
+        request.resource.data.updatedAt is timestamp;
+    }
+
+    match /bookings/{bookingId} {
+      allow read: if isOwner(resource.data.userId) || isAdmin();
+      allow create: if isAuthenticated();
+      allow update: if isOwner(resource.data.userId) || isAdmin();
+      allow delete: if isAdmin();
+
+      allow create: if isAuthenticated() &&
+        request.resource.data.userId == request.auth.uid &&
+        request.resource.data.bookingNumber is string &&
+        request.resource.data.workshopId is string &&
+        request.resource.data.scheduleDate is string &&
+        request.resource.data.scheduleTime is string &&
+        request.resource.data.participants is number &&
+        request.resource.data.participants > 0 &&
+        request.resource.data.totalPrice is number &&
+        request.resource.data.totalPrice >= 0 &&
+        request.resource.data.status in ['pending', 'confirmed', 'completed', 'cancelled'] &&
+        request.resource.data.paymentStatus in ['unpaid', 'paid', 'refunded', 'failed'] &&
+        request.resource.data.createdAt is timestamp &&
+        request.resource.data.updatedAt is timestamp;
+    }
+
+    match /arrangements/{arrangementId} {
+      allow read: if true;
+      allow create: if isAdmin();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+
+      allow write: if isAdmin() &&
+        request.resource.data.title is string &&
+        request.resource.data.description is string &&
+        request.resource.data.images is list &&
+        request.resource.data.eventType in ['wedding', 'corporate', 'birthday', 'anniversary', 'sympathy', 'other'] &&
+        request.resource.data.priceRange is map &&
+        request.resource.data.active is bool &&
+        request.resource.data.createdAt is timestamp &&
+        request.resource.data.updatedAt is timestamp;
+    }
+
+    match /inspirations/{inspirationId} {
+      allow read: if true;
+      allow create: if isAdmin();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+
+      allow write: if isAdmin() &&
+        request.resource.data.title is string &&
+        request.resource.data.slug is string &&
+        request.resource.data.excerpt is string &&
+        request.resource.data.content is string &&
+        request.resource.data.coverImage is string &&
+        request.resource.data.author is string &&
+        request.resource.data.published is bool &&
+        request.resource.data.createdAt is timestamp &&
+        request.resource.data.updatedAt is timestamp;
+    }
+  }
+}

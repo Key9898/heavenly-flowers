@@ -93,14 +93,14 @@ src/
 
 ### Phase 1: Foundation Setup
 
-- [ ] Setup Firebase project
-- [ ] Configure Firebase Authentication
-- [ ] Setup Firebase Firestore database
-- [ ] Setup Firebase Storage
-- [ ] Create project rules documentation
-- [ ] Setup ESLint configuration
-- [ ] Setup Prettier configuration
-- [ ] Setup Storybook
+- [x] Setup Firebase project
+- [x] Configure Firebase Authentication
+- [x] Setup Firebase Firestore database
+- [x] Setup Firebase Storage
+- [x] Create project rules documentation
+- [x] Setup ESLint configuration
+- [x] Setup Prettier configuration
+- [x] Setup Storybook
 
 ### Phase 2: Core Features
 
@@ -112,16 +112,7 @@ src/
 - [ ] Implement Cart functionality
 - [ ] Create Order management
 
-### Phase 3: Dashboard Development
-
-- [ ] Create separate Dashboard project
-- [ ] Implement Dashboard authentication
-- [ ] Create Product management UI
-- [ ] Create Order management UI
-- [ ] Create Customer management UI
-- [ ] Create Analytics dashboard
-
-### Phase 4: Enhancements
+### Phase 3: Enhancements
 
 - [ ] Add Framer Motion animations
 - [ ] Replace icons with Lucide Icons
@@ -130,7 +121,7 @@ src/
 - [ ] Optimize performance
 - [ ] Add SEO optimization
 
-### Phase 5: Deployment
+### Phase 4: Deployment
 
 - [ ] Configure Vercel deployment
 - [ ] Setup custom domain
@@ -160,12 +151,12 @@ src/
 module.exports = {
   theme: {
     screens: {
-      xs: "320px", // Mobile S
-      sm: "640px", // Mobile M to Tablet
-      md: "768px", // Tablet
-      lg: "1024px", // Desktop
-      xl: "1280px", // Desktop Large
-      "2xl": "1536px", // Desktop XL
+      xs: '320px', // Mobile S
+      sm: '640px', // Mobile M to Tablet
+      md: '768px', // Tablet
+      lg: '1024px', // Desktop
+      xl: '1280px', // Desktop Large
+      '2xl': '1536px', // Desktop XL
     },
   },
 };
@@ -234,41 +225,41 @@ module.exports = {
 
 ### Collection: `products`
 
-| Field           | Type                | Required | Description                    |
-| --------------- | ------------------- | -------- | ------------------------------ |
-| `id`            | string              | Yes      | Auto-generated document ID     |
-| `name`          | string              | Yes      | Product name                   |
-| `nameTh`        | string              | No       | Thai name                      |
-| `nameFr`        | string              | No       | French name                    |
-| `description`   | string              | Yes      | Product description            |
-| `descriptionTh` | string              | No       | Thai description               |
-| `price`         | number              | Yes      | Price in THB                   |
-| `images`        | array<string>       | Yes      | Array of image URLs            |
-| `category`      | string              | Yes      | 'bouquet', 'arrangement', etc. |
-| `tags`          | array<string>       | No       | Search tags                    |
-| `inStock`       | boolean             | Yes      | Availability status            |
-| `featured`      | boolean             | No       | Featured product flag          |
-| `createdAt`     | timestamp           | Yes      | Creation timestamp             |
-| `updatedAt`     | timestamp           | Yes      | Last update timestamp          |
+| Field           | Type          | Required | Description                    |
+| --------------- | ------------- | -------- | ------------------------------ |
+| `id`            | string        | Yes      | Auto-generated document ID     |
+| `name`          | string        | Yes      | Product name                   |
+| `nameTh`        | string        | No       | Thai name                      |
+| `nameFr`        | string        | No       | French name                    |
+| `description`   | string        | Yes      | Product description            |
+| `descriptionTh` | string        | No       | Thai description               |
+| `price`         | number        | Yes      | Price in THB                   |
+| `images`        | array<string> | Yes      | Array of image URLs            |
+| `category`      | string        | Yes      | 'bouquet', 'arrangement', etc. |
+| `tags`          | array<string> | No       | Search tags                    |
+| `inStock`       | boolean       | Yes      | Availability status            |
+| `featured`      | boolean       | No       | Featured product flag          |
+| `createdAt`     | timestamp     | Yes      | Creation timestamp             |
+| `updatedAt`     | timestamp     | Yes      | Last update timestamp          |
 
 ### Collection: `orders`
 
-| Field          | Type              | Required | Description                    |
-| -------------- | ----------------- | -------- | ------------------------------ |
-| `id`           | string            | Yes      | Auto-generated document ID     |
-| `orderNumber`  | string            | Yes      | Human-readable order number    |
-| `userId`       | string            | Yes      | Reference to users collection  |
-| `items`        | array<OrderItem>  | Yes      | Array of ordered items         |
-| `subtotal`     | number            | Yes      | Subtotal in THB                |
-| `deliveryFee`  | number            | Yes      | Delivery fee in THB            |
-| `total`        | number            | Yes      | Total amount in THB            |
-| `status`       | string            | Yes      | 'pending', 'confirmed', etc.   |
-| `paymentStatus`| string            | Yes      | 'unpaid', 'paid', 'refunded'   |
-| `paymentMethod`| string            | No       | 'credit_card', 'promptpay', etc. |
-| `shippingInfo` | ShippingInfo      | Yes      | Delivery address & details     |
-| `notes`        | string            | No       | Special instructions           |
-| `createdAt`    | timestamp         | Yes      | Order creation timestamp       |
-| `updatedAt`    | timestamp         | Yes      | Last update timestamp          |
+| Field           | Type             | Required | Description                      |
+| --------------- | ---------------- | -------- | -------------------------------- |
+| `id`            | string           | Yes      | Auto-generated document ID       |
+| `orderNumber`   | string           | Yes      | Human-readable order number      |
+| `userId`        | string           | Yes      | Reference to users collection    |
+| `items`         | array<OrderItem> | Yes      | Array of ordered items           |
+| `subtotal`      | number           | Yes      | Subtotal in THB                  |
+| `deliveryFee`   | number           | Yes      | Delivery fee in THB              |
+| `total`         | number           | Yes      | Total amount in THB              |
+| `status`        | string           | Yes      | 'pending', 'confirmed', etc.     |
+| `paymentStatus` | string           | Yes      | 'unpaid', 'paid', 'refunded'     |
+| `paymentMethod` | string           | No       | 'credit_card', 'promptpay', etc. |
+| `shippingInfo`  | ShippingInfo     | Yes      | Delivery address & details       |
+| `notes`         | string           | No       | Special instructions             |
+| `createdAt`     | timestamp        | Yes      | Order creation timestamp         |
+| `updatedAt`     | timestamp        | Yes      | Last update timestamp            |
 
 **OrderItem Sub-schema:**
 
@@ -282,140 +273,140 @@ module.exports = {
 
 **ShippingInfo Sub-schema:**
 
-| Field         | Type   | Description             |
-| ------------- | ------ | ----------------------- |
-| `name`        | string | Recipient name          |
-| `phone`       | string | Contact phone           |
-| `address`     | string | Full address            |
-| `district`    | string | District/Khwaeng        |
-| `province`    | string | Province/Changwat       |
-| `postalCode`  | string | Thai postal code        |
-| `deliveryDate`| string | Preferred delivery date |
-| `deliveryTime`| string | Preferred delivery time |
+| Field          | Type   | Description             |
+| -------------- | ------ | ----------------------- |
+| `name`         | string | Recipient name          |
+| `phone`        | string | Contact phone           |
+| `address`      | string | Full address            |
+| `district`     | string | District/Khwaeng        |
+| `province`     | string | Province/Changwat       |
+| `postalCode`   | string | Thai postal code        |
+| `deliveryDate` | string | Preferred delivery date |
+| `deliveryTime` | string | Preferred delivery time |
 
 ### Collection: `users`
 
-| Field        | Type          | Required | Description                   |
-| ------------ | ------------- | -------- | ----------------------------- |
-| `id`         | string        | Yes      | Firebase Auth UID             |
-| `email`      | string        | Yes      | User email                    |
-| `displayName`| string        | No       | Display name                  |
-| `phone`      | string        | No       | Phone number                  |
-| `photoURL`   | string        | No       | Profile photo URL             |
-| `role`       | string        | Yes      | 'customer', 'admin'           |
-| `addresses`  | array<Address>| No       | Saved addresses               |
-| `favorites`  | array<string> | No       | Favorite product IDs          |
-| `createdAt`  | timestamp     | Yes      | Account creation timestamp    |
-| `updatedAt`  | timestamp     | Yes      | Last update timestamp         |
+| Field         | Type           | Required | Description                |
+| ------------- | -------------- | -------- | -------------------------- |
+| `id`          | string         | Yes      | Firebase Auth UID          |
+| `email`       | string         | Yes      | User email                 |
+| `displayName` | string         | No       | Display name               |
+| `phone`       | string         | No       | Phone number               |
+| `photoURL`    | string         | No       | Profile photo URL          |
+| `role`        | string         | Yes      | 'customer', 'admin'        |
+| `addresses`   | array<Address> | No       | Saved addresses            |
+| `favorites`   | array<string>  | No       | Favorite product IDs       |
+| `createdAt`   | timestamp      | Yes      | Account creation timestamp |
+| `updatedAt`   | timestamp      | Yes      | Last update timestamp      |
 
 **Address Sub-schema:**
 
-| Field        | Type   | Description          |
-| ------------ | ------ | -------------------- |
-| `label`      | string | 'home', 'work', etc. |
-| `name`       | string | Recipient name       |
-| `phone`      | string | Contact phone        |
-| `address`    | string | Full address         |
-| `district`   | string | District             |
-| `province`   | string | Province             |
-| `postalCode` | string | Postal code          |
-| `isDefault`  | boolean| Default address flag |
+| Field        | Type    | Description          |
+| ------------ | ------- | -------------------- |
+| `label`      | string  | 'home', 'work', etc. |
+| `name`       | string  | Recipient name       |
+| `phone`      | string  | Contact phone        |
+| `address`    | string  | Full address         |
+| `district`   | string  | District             |
+| `province`   | string  | Province             |
+| `postalCode` | string  | Postal code          |
+| `isDefault`  | boolean | Default address flag |
 
 ### Collection: `workshops`
 
-| Field          | Type          | Required | Description                    |
-| -------------- | ------------- | -------- | ------------------------------ |
-| `id`           | string        | Yes      | Auto-generated document ID     |
-| `title`        | string        | Yes      | Workshop title                 |
-| `titleTh`      | string        | No       | Thai title                     |
-| `description`  | string        | Yes      | Workshop description           |
-| `descriptionTh`| string        | No       | Thai description               |
-| `image`        | string        | Yes      | Cover image URL                |
-| `images`       | array<string> | No       | Gallery images                 |
-| `price`        | number        | Yes      | Price per person in THB        |
-| `duration`     | number        | Yes      | Duration in minutes            |
-| `maxParticipants`| number      | Yes      | Maximum participants           |
-| `schedule`     | array<Schedule>| Yes    | Available schedules            |
-| `instructor`   | string        | Yes      | Instructor name                |
-| `location`     | string        | Yes      | Workshop venue                 |
-| `requirements` | array<string> | No       | What to bring                  |
-| `includes`     | array<string> | No       | What's included                |
-| `active`       | boolean       | Yes      | Active status                  |
-| `createdAt`    | timestamp     | Yes      | Creation timestamp             |
-| `updatedAt`    | timestamp     | Yes      | Last update timestamp          |
+| Field             | Type            | Required | Description                |
+| ----------------- | --------------- | -------- | -------------------------- |
+| `id`              | string          | Yes      | Auto-generated document ID |
+| `title`           | string          | Yes      | Workshop title             |
+| `titleTh`         | string          | No       | Thai title                 |
+| `description`     | string          | Yes      | Workshop description       |
+| `descriptionTh`   | string          | No       | Thai description           |
+| `image`           | string          | Yes      | Cover image URL            |
+| `images`          | array<string>   | No       | Gallery images             |
+| `price`           | number          | Yes      | Price per person in THB    |
+| `duration`        | number          | Yes      | Duration in minutes        |
+| `maxParticipants` | number          | Yes      | Maximum participants       |
+| `schedule`        | array<Schedule> | Yes      | Available schedules        |
+| `instructor`      | string          | Yes      | Instructor name            |
+| `location`        | string          | Yes      | Workshop venue             |
+| `requirements`    | array<string>   | No       | What to bring              |
+| `includes`        | array<string>   | No       | What's included            |
+| `active`          | boolean         | Yes      | Active status              |
+| `createdAt`       | timestamp       | Yes      | Creation timestamp         |
+| `updatedAt`       | timestamp       | Yes      | Last update timestamp      |
 
 **Schedule Sub-schema:**
 
-| Field      | Type   | Description              |
-| ---------- | ------ | ------------------------ |
-| `date`     | string | Date (YYYY-MM-DD)        |
-| `startTime`| string | Start time (HH:mm)       |
-| `endTime`  | string | End time (HH:mm)         |
-| `available`| number | Available slots          |
-| `booked`   | number | Booked slots             |
+| Field       | Type   | Description        |
+| ----------- | ------ | ------------------ |
+| `date`      | string | Date (YYYY-MM-DD)  |
+| `startTime` | string | Start time (HH:mm) |
+| `endTime`   | string | End time (HH:mm)   |
+| `available` | number | Available slots    |
+| `booked`    | number | Booked slots       |
 
 ### Collection: `arrangements`
 
-| Field          | Type          | Required | Description                    |
-| -------------- | ------------- | -------- | ------------------------------ |
-| `id`           | string        | Yes      | Auto-generated document ID     |
-| `title`        | string        | Yes      | Arrangement title              |
-| `titleTh`      | string        | No       | Thai title                     |
-| `description`  | string        | Yes      | Description                    |
-| `descriptionTh`| string        | No       | Thai description               |
-| `images`       | array<string> | Yes      | Portfolio images               |
-| `eventType`    | string        | Yes      | 'wedding', 'corporate', etc.   |
-| `priceRange`   | PriceRange    | Yes      | Price range                    |
-| `features`     | array<string> | No       | Key features                   |
-| `active`       | boolean       | Yes      | Active status                  |
-| `createdAt`    | timestamp     | Yes      | Creation timestamp             |
-| `updatedAt`    | timestamp     | Yes      | Last update timestamp          |
+| Field           | Type          | Required | Description                  |
+| --------------- | ------------- | -------- | ---------------------------- |
+| `id`            | string        | Yes      | Auto-generated document ID   |
+| `title`         | string        | Yes      | Arrangement title            |
+| `titleTh`       | string        | No       | Thai title                   |
+| `description`   | string        | Yes      | Description                  |
+| `descriptionTh` | string        | No       | Thai description             |
+| `images`        | array<string> | Yes      | Portfolio images             |
+| `eventType`     | string        | Yes      | 'wedding', 'corporate', etc. |
+| `priceRange`    | PriceRange    | Yes      | Price range                  |
+| `features`      | array<string> | No       | Key features                 |
+| `active`        | boolean       | Yes      | Active status                |
+| `createdAt`     | timestamp     | Yes      | Creation timestamp           |
+| `updatedAt`     | timestamp     | Yes      | Last update timestamp        |
 
 **PriceRange Sub-schema:**
 
-| Field     | Type   | Description          |
-| --------- | ------ | -------------------- |
-| `min`     | number | Minimum price in THB |
-| `max`     | number | Maximum price in THB |
+| Field | Type   | Description          |
+| ----- | ------ | -------------------- |
+| `min` | number | Minimum price in THB |
+| `max` | number | Maximum price in THB |
 
 ### Collection: `inspirations`
 
-| Field          | Type          | Required | Description                    |
-| -------------- | ------------- | -------- | ------------------------------ |
-| `id`           | string        | Yes      | Auto-generated document ID     |
-| `title`        | string        | Yes      | Blog post title                |
-| `titleTh`      | string        | No       | Thai title                     |
-| `slug`         | string        | Yes      | URL-friendly slug              |
-| `excerpt`      | string        | Yes      | Short excerpt                  |
-| `excerptTh`    | string        | No       | Thai excerpt                   |
-| `content`      | string        | Yes      | Full content (markdown)        |
-| `contentTh`    | string        | No       | Thai content                   |
-| `coverImage`   | string        | Yes      | Cover image URL                |
-| `images`       | array<string> | No       | Gallery images                 |
-| `author`       | string        | Yes      | Author name                    |
-| `tags`         | array<string> | No       | Tags for filtering             |
-| `published`    | boolean       | Yes      | Published status               |
-| `publishedAt`  | timestamp     | No       | Publication date               |
-| `createdAt`    | timestamp     | Yes      | Creation timestamp             |
-| `updatedAt`    | timestamp     | Yes      | Last update timestamp          |
+| Field         | Type          | Required | Description                |
+| ------------- | ------------- | -------- | -------------------------- |
+| `id`          | string        | Yes      | Auto-generated document ID |
+| `title`       | string        | Yes      | Blog post title            |
+| `titleTh`     | string        | No       | Thai title                 |
+| `slug`        | string        | Yes      | URL-friendly slug          |
+| `excerpt`     | string        | Yes      | Short excerpt              |
+| `excerptTh`   | string        | No       | Thai excerpt               |
+| `content`     | string        | Yes      | Full content (markdown)    |
+| `contentTh`   | string        | No       | Thai content               |
+| `coverImage`  | string        | Yes      | Cover image URL            |
+| `images`      | array<string> | No       | Gallery images             |
+| `author`      | string        | Yes      | Author name                |
+| `tags`        | array<string> | No       | Tags for filtering         |
+| `published`   | boolean       | Yes      | Published status           |
+| `publishedAt` | timestamp     | No       | Publication date           |
+| `createdAt`   | timestamp     | Yes      | Creation timestamp         |
+| `updatedAt`   | timestamp     | Yes      | Last update timestamp      |
 
 ### Collection: `bookings`
 
-| Field         | Type     | Required | Description                    |
-| ------------- | -------- | -------- | ------------------------------ |
-| `id`          | string   | Yes      | Auto-generated document ID     |
-| `bookingNumber`| string  | Yes      | Human-readable booking number  |
-| `userId`      | string   | Yes      | Reference to users collection  |
-| `workshopId`  | string   | Yes      | Reference to workshops         |
-| `scheduleDate`| string   | Yes      | Booked date (YYYY-MM-DD)       |
-| `scheduleTime`| string   | Yes      | Booked time slot               |
-| `participants`| number   | Yes      | Number of participants         |
-| `totalPrice`  | number   | Yes      | Total price in THB             |
-| `status`      | string   | Yes      | 'pending', 'confirmed', etc.   |
-| `paymentStatus`| string  | Yes      | Payment status                 |
-| `notes`       | string   | No       | Special requests               |
-| `createdAt`   | timestamp| Yes      | Booking creation timestamp     |
-| `updatedAt`   | timestamp| Yes      | Last update timestamp          |
+| Field           | Type      | Required | Description                   |
+| --------------- | --------- | -------- | ----------------------------- |
+| `id`            | string    | Yes      | Auto-generated document ID    |
+| `bookingNumber` | string    | Yes      | Human-readable booking number |
+| `userId`        | string    | Yes      | Reference to users collection |
+| `workshopId`    | string    | Yes      | Reference to workshops        |
+| `scheduleDate`  | string    | Yes      | Booked date (YYYY-MM-DD)      |
+| `scheduleTime`  | string    | Yes      | Booked time slot              |
+| `participants`  | number    | Yes      | Number of participants        |
+| `totalPrice`    | number    | Yes      | Total price in THB            |
+| `status`        | string    | Yes      | 'pending', 'confirmed', etc.  |
+| `paymentStatus` | string    | Yes      | Payment status                |
+| `notes`         | string    | No       | Special requests              |
+| `createdAt`     | timestamp | Yes      | Booking creation timestamp    |
+| `updatedAt`     | timestamp | Yes      | Last update timestamp         |
 
 ### Collection Relationships
 
@@ -634,18 +625,18 @@ VITE_LINE_ID=@heavenlyflowers
 
 ### Environment Variable Usage
 
-| Variable                       | Purpose                    | Required |
-| ------------------------------ | -------------------------- | -------- |
-| `VITE_FIREBASE_API_KEY`        | Firebase API key           | Yes      |
-| `VITE_FIREBASE_AUTH_DOMAIN`    | Firebase Auth domain       | Yes      |
-| `VITE_FIREBASE_PROJECT_ID`     | Firebase project ID        | Yes      |
-| `VITE_FIREBASE_STORAGE_BUCKET` | Firebase Storage bucket    | Yes      |
-| `VITE_FIREBASE_MESSAGING_SENDER_ID` | Firebase Messaging ID | Yes      |
-| `VITE_FIREBASE_APP_ID`         | Firebase App ID            | Yes      |
-| `VITE_FIREBASE_MEASUREMENT_ID` | Firebase Analytics ID      | No       |
-| `VITE_USE_EMULATOR`            | Use local emulators        | No       |
-| `VITE_STRIPE_PUBLIC_KEY`       | Stripe payment             | No       |
-| `VITE_GA_TRACKING_ID`          | Google Analytics           | No       |
+| Variable                            | Purpose                 | Required |
+| ----------------------------------- | ----------------------- | -------- |
+| `VITE_FIREBASE_API_KEY`             | Firebase API key        | Yes      |
+| `VITE_FIREBASE_AUTH_DOMAIN`         | Firebase Auth domain    | Yes      |
+| `VITE_FIREBASE_PROJECT_ID`          | Firebase project ID     | Yes      |
+| `VITE_FIREBASE_STORAGE_BUCKET`      | Firebase Storage bucket | Yes      |
+| `VITE_FIREBASE_MESSAGING_SENDER_ID` | Firebase Messaging ID   | Yes      |
+| `VITE_FIREBASE_APP_ID`              | Firebase App ID         | Yes      |
+| `VITE_FIREBASE_MEASUREMENT_ID`      | Firebase Analytics ID   | No       |
+| `VITE_USE_EMULATOR`                 | Use local emulators     | No       |
+| `VITE_STRIPE_PUBLIC_KEY`            | Stripe payment          | No       |
+| `VITE_GA_TRACKING_ID`               | Google Analytics        | No       |
 
 ---
 
@@ -653,42 +644,42 @@ VITE_LINE_ID=@heavenlyflowers
 
 ### Payment Gateways
 
-| Provider | Purpose           | Status   | Notes                         |
-| -------- | ----------------- | -------- | ----------------------------- |
-| Stripe   | International cards | Planned | Best for international users  |
-| Omise    | Thai payment      | Planned | Local Thai payment methods    |
-| PromptPay| QR payment        | Planned | Popular in Thailand           |
+| Provider  | Purpose             | Status  | Notes                        |
+| --------- | ------------------- | ------- | ---------------------------- |
+| Stripe    | International cards | Planned | Best for international users |
+| Omise     | Thai payment        | Planned | Local Thai payment methods   |
+| PromptPay | QR payment          | Planned | Popular in Thailand          |
 
 ### Analytics & Monitoring
 
-| Service      | Purpose              | Status   | Notes                    |
-| ------------ | -------------------- | -------- | ------------------------ |
-| Google Analytics | User tracking    | Planned | Free tier available      |
-| Firebase Analytics | App analytics | Planned | Integrated with Firebase |
-| Sentry       | Error tracking       | Planned | Free tier available      |
-| LogRocket    | Session replay       | Planned | For debugging            |
+| Service            | Purpose        | Status  | Notes                    |
+| ------------------ | -------------- | ------- | ------------------------ |
+| Google Analytics   | User tracking  | Planned | Free tier available      |
+| Firebase Analytics | App analytics  | Planned | Integrated with Firebase |
+| Sentry             | Error tracking | Planned | Free tier available      |
+| LogRocket          | Session replay | Planned | For debugging            |
 
 ### Email Services
 
-| Service  | Purpose           | Status   | Notes                    |
-| -------- | ----------------- | -------- | ------------------------ |
-| SendGrid | Transactional email | Planned | Order confirmations    |
-| Firebase Extensions | Email triggers | Planned | Firebase integration   |
+| Service             | Purpose             | Status  | Notes                |
+| ------------------- | ------------------- | ------- | -------------------- |
+| SendGrid            | Transactional email | Planned | Order confirmations  |
+| Firebase Extensions | Email triggers      | Planned | Firebase integration |
 
 ### Social Media
 
-| Platform  | Purpose              | Status   |
-| --------- | -------------------- | -------- |
-| Instagram | Portfolio & marketing| Active   |
-| Facebook  | Business page        | Active   |
-| LINE OA   | Customer support     | Planned  |
+| Platform  | Purpose               | Status  |
+| --------- | --------------------- | ------- |
+| Instagram | Portfolio & marketing | Active  |
+| Facebook  | Business page         | Active  |
+| LINE OA   | Customer support      | Planned |
 
 ### Storage & CDN
 
-| Service          | Purpose           | Status   |
-| ---------------- | ----------------- | -------- |
-| Firebase Storage | Image storage     | Planned  |
-| Vercel CDN       | Static assets     | Active   |
+| Service          | Purpose       | Status  |
+| ---------------- | ------------- | ------- |
+| Firebase Storage | Image storage | Planned |
+| Vercel CDN       | Static assets | Active  |
 
 ---
 
@@ -696,11 +687,11 @@ VITE_LINE_ID=@heavenlyflowers
 
 ### Supported Languages
 
-| Language   | Code | Priority | Status   |
-| ---------- | ---- | -------- | -------- |
-| Thai       | `th` | Primary  | Required |
-| English    | `en` | Secondary| Required |
-| French     | `fr` | Optional | Future   |
+| Language | Code | Priority  | Status   |
+| -------- | ---- | --------- | -------- |
+| Thai     | `th` | Primary   | Required |
+| English  | `en` | Secondary | Required |
+| French   | `fr` | Optional  | Future   |
 
 ### Implementation Strategy
 
@@ -739,12 +730,12 @@ src/
 
 ### Currency & Formatting
 
-| Setting          | Thai (th)      | English (en)   |
-| ---------------- | -------------- | -------------- |
-| Currency         | THB (฿)        | THB (฿)        |
-| Date Format      | DD/MM/YYYY     | DD/MM/YYYY     |
-| Number Format    | 1,234.56       | 1,234.56       |
-| Phone Format     | +66 XX XXX XXXX| +66 XX XXX XXXX|
+| Setting       | Thai (th)       | English (en)    |
+| ------------- | --------------- | --------------- |
+| Currency      | THB (฿)         | THB (฿)         |
+| Date Format   | DD/MM/YYYY      | DD/MM/YYYY      |
+| Number Format | 1,234.56        | 1,234.56        |
+| Phone Format  | +66 XX XXX XXXX | +66 XX XXX XXXX |
 
 ---
 
@@ -763,6 +754,7 @@ src/
 ### Vercel Setup
 
 1. **Connect Repository**
+
    ```bash
    # Install Vercel CLI
    npm i -g vercel
@@ -795,6 +787,7 @@ src/
    - Add: `www.heavenlyflowers.com`
 
 2. **DNS Configuration**
+
    ```
    Type: A
    Name: @
@@ -808,11 +801,13 @@ src/
 ### Firebase Production
 
 1. **Create Production Project**
+
    ```bash
    firebase projects:create heavenly-flowers-prod
    ```
 
 2. **Deploy Security Rules**
+
    ```bash
    firebase deploy --only firestore:rules
    firebase deploy --only storage
@@ -840,17 +835,17 @@ src/
 
 ### Key Metrics to Track
 
-| Metric                  | Tool              | Frequency |
-| ----------------------- | ----------------- | --------- |
-| Page Views              | Google Analytics  | Real-time |
-| Unique Visitors         | Google Analytics  | Daily     |
-| Conversion Rate         | Google Analytics  | Weekly    |
-| Cart Abandonment Rate   | Custom            | Weekly    |
-| Average Order Value     | Custom            | Weekly    |
-| Product Views           | Google Analytics  | Daily     |
-| Workshop Bookings       | Custom            | Weekly    |
-| Error Rate              | Sentry            | Real-time |
-| Page Load Time          | Vercel Analytics  | Real-time |
+| Metric                | Tool             | Frequency |
+| --------------------- | ---------------- | --------- |
+| Page Views            | Google Analytics | Real-time |
+| Unique Visitors       | Google Analytics | Daily     |
+| Conversion Rate       | Google Analytics | Weekly    |
+| Cart Abandonment Rate | Custom           | Weekly    |
+| Average Order Value   | Custom           | Weekly    |
+| Product Views         | Google Analytics | Daily     |
+| Workshop Bookings     | Custom           | Weekly    |
+| Error Rate            | Sentry           | Real-time |
+| Page Load Time        | Vercel Analytics | Real-time |
 
 ### Dashboard Metrics
 
@@ -883,7 +878,7 @@ src/
 
 ```typescript
 // src/utils/sentry.ts
-import * as Sentry from "@sentry/react";
+import * as Sentry from '@sentry/react';
 
 Sentry.init({
   dsn: import.meta.env.VITE_SENTRY_DSN,
@@ -896,13 +891,13 @@ Sentry.init({
 
 ### Performance Monitoring
 
-| Metric                      | Target    | Alert Threshold |
-| --------------------------- | --------- | --------------- |
-| First Contentful Paint      | < 1.5s    | > 2.5s          |
-| Largest Contentful Paint    | < 2.5s    | > 4.0s          |
-| Time to Interactive         | < 3.0s    | > 5.0s          |
-| Cumulative Layout Shift     | < 0.1     | > 0.25          |
-| First Input Delay           | < 100ms   | > 300ms         |
+| Metric                   | Target  | Alert Threshold |
+| ------------------------ | ------- | --------------- |
+| First Contentful Paint   | < 1.5s  | > 2.5s          |
+| Largest Contentful Paint | < 2.5s  | > 4.0s          |
+| Time to Interactive      | < 3.0s  | > 5.0s          |
+| Cumulative Layout Shift  | < 0.1   | > 0.25          |
+| First Input Delay        | < 100ms | > 300ms         |
 
 ---
 
