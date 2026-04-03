@@ -85,7 +85,7 @@ export default function FAQs({ onNavigate }: FAQsProps) {
                 <div aria-hidden="true" className="relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-900/60 to-slate-900/40" /> {/* Dark Thing */}
                     <img
-                        alt="Floral Haven Frequently Asked Questions - Flower delivery and care instructions"                        
+                        alt="Floral Haven Frequently Asked Questions - Flower delivery and care instructions"
                         src={faqsImg}
                         className="h-96 w-full object-cover"
                     />

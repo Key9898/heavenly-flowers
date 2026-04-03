@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "sanity": "sanity dev --port 3333"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -18,14 +17,9 @@
     "@material-tailwind/react": "^2.1.10",
     "@mui/icons-material": "^7.3.2",
     "@mui/material": "^7.3.2",
-    "@sanity/cli": "^4.3.0",
-    "@sanity/client": "^7.11.2",
-    "@sanity/image-url": "^1.2.0",
-    "@sanity/vision": "^4.10.1",
     "@tailwindcss/vite": "^4.1.12",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "sanity": "^4.3.0",
     "styled-components": "^6.1.19",
     "tailwind-scrollbar-hide": "^4.0.0",
     "tailwindcss": "^4.1.12"

@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +23,37 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# AI IDEs and Agents
+.adal
+.agents
+.augment
+.bob
+.claude
+.codebuddy
+.commandcode
+.continure
+.cortex
+.crush
+.factory
+.github
+.goose
+.iflow
+.junie
+.kilocode
+.kiro
+.kode
+.mcpjam
+.mux
+.neovate
+.openhands
+.pi
+.pochi
+.qoder
+.qwen
+.roo
+.trae
+.vibe
+.windsurf
+.zencoder
+.skills
