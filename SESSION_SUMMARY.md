@@ -4,6 +4,39 @@ Track all development sessions for continuity between AI agents.
 
 ---
 
+## Session: 2026-04-04 (Vercel Deployment Fix)
+
+### Summary
+Fixed Vercel deployment failure caused by npm dependency conflicts with Storybook packages.
+
+### Tasks Completed
+1. **Dependency Conflict Resolution**
+   - Identified conflicting Storybook alpha versions (9.x vs 10.x)
+   - Downgraded all Storybook packages to stable 8.6.14
+   - Created `.npmrc` for Vite 7 peer dependency bypass
+
+### Files Modified
+- `package.json` - Updated Storybook dependencies to 8.6.14
+- `CHANGELOG.md` - Documented dependency fix
+
+### Files Created
+- `.npmrc` - npm configuration with `legacy-peer-deps=true`
+
+### Current State
+- Local build: ✓ Successful
+- Vercel deployment: Pending (needs git push)
+
+### Next Steps
+1. Push changes to git to trigger Vercel redeploy
+2. Verify Vercel deployment succeeds
+
+### Technical Notes
+- Storybook 8.6.x peer dependency requires Vite 4-6, not Vite 7
+- `legacy-peer-deps=true` bypasses this check
+- All Storybook packages must be same version for compatibility
+
+---
+
 ## Session: 2026-04-04 (Phase 2 Core Features)
 
 ### Summary

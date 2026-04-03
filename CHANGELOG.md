@@ -8,9 +8,38 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Dependency Fix - 2026-04-04
+
+#### Fixed
+
+- **Vercel Build Failure** - Resolved npm ERESOLVE dependency conflict
+  - Storybook packages had conflicting alpha versions (9.x vs 10.x)
+  - Downgraded all Storybook packages to stable version 8.6.14
+  - Created `.npmrc` with `legacy-peer-deps=true` for Vite 7 compatibility
+
+#### Changed
+
+- `package.json` - Updated Storybook dependencies:
+  - `storybook`: ^10.4.0-alpha.7 → ^8.6.14
+  - `@storybook/react-vite`: ^10.4.0-alpha.7 → ^8.6.14
+  - `@storybook/addon-essentials`: ^9.0.0-alpha.12 → ^8.6.14
+  - `@storybook/addon-interactions`: ^9.0.0-alpha.10 → ^8.6.14
+  - `@storybook/test`: ^9.0.0-alpha.2 → ^8.6.14
+
+#### Added
+
+- `.npmrc` - npm configuration with `legacy-peer-deps=true`
+
+#### Technical Notes
+
+- Storybook 8.6.x doesn't officially support Vite 7 (peer dependency requires Vite ^4.0.0 || ^5.0.0 || ^6.0.0)
+- `legacy-peer-deps` bypasses peer dependency resolution for compatibility
+- Local build verified successful before pushing to Vercel
+
 ### Phase 2 Core Features - 2026-04-04
 
 #### Added
+
 - **Custom Hooks** - Created data fetching hooks for all collections
   - `src/hooks/useAuth.ts` - Authentication hook with Firebase integration
   - `src/hooks/useProducts.ts` - Products CRUD operations
@@ -44,6 +73,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Bookings: userId + createdAt, workshopId + createdAt
 
 #### Changed
+
 - **Firebase Import Fix** - Fixed `import type { User }` in useAuth.ts
   - Changed to `import { type User }` for proper TypeScript verbatimModuleSyntax compatibility
 
@@ -71,9 +101,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Renamed Phase 5: Deployment → Phase 4: Deployment
 
 #### Fixed
+
 - Firebase User import error in useAuth.ts (verbatimModuleSyntax compatibility)
 
 #### Technical Notes
+
 - All hooks follow project rules (no semicolons)
 - TypeScript strict mode compatible
 - Firebase v12.11.0 integration
@@ -82,6 +114,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Branding & Assets - 2026-04-04
 
 #### Added
+
 - **Premium Favicon** - Created high-fidelity gold monogram "F" favicon in SVG format
   - Professional serif typography with subtle floral accents
   - Brand-consistent metallic gold color (`#B4912D`)
@@ -91,6 +124,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Created `public/Logo/` for primary branding SVGs
 
 #### Changed
+
 - **Asset Paths** - Moved original `logo.svg` to the new `public/Logo/` directory
 - **Browser Integration** - Updated `index.html` to reference the new favicon location (`/favicon/favicon.svg`)
 
@@ -100,7 +134,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - **Firebase Configuration** - Created `.env` file with Firebase project configuration
   - All Firebase environment variables (API key, auth domain, project ID, storage bucket, etc.)
-  - VITE_ prefix for Vite compatibility
+  - VITE\_ prefix for Vite compatibility
 
 - **Storybook Setup** - Configured Storybook for component documentation
   - `.storybook/main.ts` - Core configuration with React-Vite framework
